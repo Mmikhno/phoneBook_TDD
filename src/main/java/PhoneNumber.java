@@ -1,3 +1,7 @@
+import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class PhoneNumber {
     private String name;
     private String lastName;
@@ -34,11 +38,40 @@ public class PhoneNumber {
     }
 
     static boolean isItPhoneNumber(String number) {
-        return false;
+        //  Pattern pattern = Pattern.compile("\\+[0-9]{1,3}\\([0-9]{1,3}\\)[0-9]{3}\\-[0-9]{4}");
+        Pattern pattern = Pattern.compile("\\+*[0-9]{11,18}");
+        Matcher matcher = pattern.matcher(number);
+        return matcher.matches();
     }
 
     static PhoneNumber newNumber(String name, String lastName, String number) {
-        return null;
+        if (number == null || number == "") {
+            throw new IllegalArgumentException("Number cannot be blank");
+        }
+        if (!isItPhoneNumber(number)) {
+            throw new IllegalArgumentException("Number " + number + " is incorrect");
+        }
+        if (name == null || name == "" || lastName == null || lastName == "") {
+            throw new IllegalArgumentException("Name or lastname cannot be blank");
+        }
+        return new PhoneNumber(name, lastName, number);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+        PhoneNumber pn = (PhoneNumber) obj;
+        return name.equals(pn.name) && lastName.equals(pn.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, lastName);
     }
 
 }
