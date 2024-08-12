@@ -12,4 +12,9 @@ public class PhoneBook {
         phoneBook.add(phoneNumber);
         return phoneBook.size();
     }
+
+    public String findByNumber(String number) {
+        return null;
+    }
+
 }
