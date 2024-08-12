@@ -1,5 +1,8 @@
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public class PhoneBook {
     Set<PhoneNumber> phoneBook = new HashSet<>();
@@ -14,7 +17,18 @@ public class PhoneBook {
     }
 
     public String findByNumber(String number) {
-        return null;
+        if (number.trim() == "") {
+            throw new IllegalArgumentException("Please specify phone number");
+        }
+        Optional<PhoneNumber> phoneNumber = Stream.ofNullable(phoneBook)
+                .flatMap(Collection::stream)
+                .filter(item -> item.getNumber().equals(number))
+                .findFirst();
+        if (!phoneNumber.isPresent()) {
+            System.out.println("Number not found");
+            return "";
+        }
+        return phoneNumber.get().getName() + " " + phoneNumber.get().getLastName();
     }
 
 }

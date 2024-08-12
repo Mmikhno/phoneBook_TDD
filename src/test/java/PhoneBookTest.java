@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PhoneBookTest {
@@ -22,6 +23,16 @@ public class PhoneBookTest {
         phoneBook.add("Person", "Unknown", "+71234567890");
         String expected = "User Userov";
         String actual = phoneBook.findByNumber("+79876543210");
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindNameByEmptyNumber() {
+        phoneBook.add("Test", "Testov", "+12345698741");
+        phoneBook.add("User", "Userov", "+79876543210");
+        phoneBook.add("Person", "Unknown", "+71234567890");
+        String expected = "";
+        String actual = phoneBook.findByNumber("+147");
+        assertEquals(expected, actual);
     }
 }
