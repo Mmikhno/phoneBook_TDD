@@ -31,4 +31,8 @@ public class PhoneBook {
         return phoneNumber.get().getName() + " " + phoneNumber.get().getLastName();
     }
 
+    public String findByName(String name, String lastName) {
+        return null;
+    }
+
 }

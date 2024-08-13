@@ -30,5 +30,4 @@ public class PhoneNumberTest {
         Assertions.assertTrue(actualMessage.equals(expectedMessage));
     }
 
-
 }

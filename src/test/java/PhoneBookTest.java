@@ -27,12 +27,32 @@ public class PhoneBookTest {
     }
 
     @Test
-    public void shouldFindNameByEmptyNumber() {
+    public void shouldNotFindNameByNumber() {
         phoneBook.add("Test", "Testov", "+12345698741");
         phoneBook.add("User", "Userov", "+79876543210");
         phoneBook.add("Person", "Unknown", "+71234567890");
         String expected = "";
         String actual = phoneBook.findByNumber("+147");
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindNumberByName() {
+        phoneBook.add("Test", "Testov", "+12345698741");
+        phoneBook.add("User", "Userov", "+79876543210");
+        phoneBook.add("Person", "Unknown", "+71234567890");
+        String expected = "+71234567890";
+        String actual = phoneBook.findByName("Person", "Unknown");
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotFindNumberByName() {
+        phoneBook.add("Test", "Testov", "+12345698741");
+        phoneBook.add("User", "Userov", "+79876543210");
+        phoneBook.add("Person", "Unknown", "+71234567890");
+        String expected = "";
+        String actual = phoneBook.findByName("Some", "Person");
+        Assertions.assertEquals(expected, actual);
     }
 }
