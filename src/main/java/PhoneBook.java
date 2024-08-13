@@ -46,4 +46,8 @@ public class PhoneBook {
         return phoneNumber.get().getNumber();
     }
 
+    public void printAllNames() {
+
+    }
+
 }

@@ -1,11 +1,15 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PhoneBookTest {
     PhoneBook phoneBook = new PhoneBook();
+    private ByteArrayOutputStream output = new ByteArrayOutputStream();
 
     @Test
     void shouldAddNewPhoneNumber() {
@@ -54,5 +58,16 @@ public class PhoneBookTest {
         String expected = "";
         String actual = phoneBook.findByName("Some", "Person");
         Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldPrintAllNames() {
+        phoneBook.add("Test", "Testov", "+12345698741");
+        phoneBook.add("User", "Userov", "+79876543210");
+        phoneBook.add("Person", "Unknown", "+71234567890");
+        System.setOut(new PrintStream(new PrintStream(output)));
+        String expected = "Person Unknown\nTest Testov\nUser Userov\n";
+        phoneBook.printAllNames();
+        Assertions.assertEquals(expected, output.toString());
     }
 }
