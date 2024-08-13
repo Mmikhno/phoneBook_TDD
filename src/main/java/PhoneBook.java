@@ -1,7 +1,4 @@
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class PhoneBook {
@@ -47,7 +44,9 @@ public class PhoneBook {
     }
 
     public void printAllNames() {
-
+        phoneBook.stream()
+                .sorted(Comparator.comparing(PhoneNumber::getName).thenComparing(PhoneNumber::getLastName))
+                .forEach(i -> System.out.printf("%s %s\n", i.getName(), i.getLastName()));
     }
 
 }
