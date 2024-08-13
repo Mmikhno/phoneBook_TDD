@@ -32,7 +32,18 @@ public class PhoneBook {
     }
 
     public String findByName(String name, String lastName) {
-        return null;
+        if (name.trim() == "" || lastName.trim() == "") {
+            throw new IllegalArgumentException("Please specify full name");
+        }
+        Optional<PhoneNumber> phoneNumber = Stream.ofNullable(phoneBook)
+                .flatMap(Collection::stream)
+                .filter(item -> item.getName().equals(name) && item.getLastName().equals(lastName))
+                .findFirst();
+        if (!phoneNumber.isPresent()) {
+            System.out.println("Name not found");
+            return "";
+        }
+        return phoneNumber.get().getNumber();
     }
 
 }
