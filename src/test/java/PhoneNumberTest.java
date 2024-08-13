@@ -1,9 +1,8 @@
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PhoneNumberTest {
     @Test
@@ -22,12 +21,12 @@ public class PhoneNumberTest {
             "Test, User, 123456789, Number 123456789 is incorrect"
     })
     void shouldAddIncorrectPhoneNumber(String name, String lastName, String number, String resultMessage) {
-        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             PhoneNumber pn = PhoneNumber.newNumber(name, lastName, number);
         });
         String expectedMessage = resultMessage;
         String actualMessage = exception.getMessage();
-        Assertions.assertTrue(actualMessage.equals(expectedMessage));
+        assertTrue(actualMessage.equals(expectedMessage));
     }
 
 

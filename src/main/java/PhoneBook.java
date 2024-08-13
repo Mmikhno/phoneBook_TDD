@@ -22,14 +22,14 @@ public class PhoneBook {
                 .filter(item -> item.getNumber().equals(number))
                 .findFirst();
         if (!phoneNumber.isPresent()) {
-            System.out.println("Number not found");
+            System.out.print("Number not found");
             return "";
         }
         return phoneNumber.get().getName() + " " + phoneNumber.get().getLastName();
     }
 
     public String findByName(String name, String lastName) {
-        if (name.trim() == "" || lastName.trim() == "") {
+        if (name == "" || lastName == "" || name == null || lastName == null) {
             throw new IllegalArgumentException("Please specify full name");
         }
         Optional<PhoneNumber> phoneNumber = Stream.ofNullable(phoneBook)
@@ -37,7 +37,7 @@ public class PhoneBook {
                 .filter(item -> item.getName().equals(name) && item.getLastName().equals(lastName))
                 .findFirst();
         if (!phoneNumber.isPresent()) {
-            System.out.println("Name not found");
+            System.out.print("Name not found");
             return "";
         }
         return phoneNumber.get().getNumber();
